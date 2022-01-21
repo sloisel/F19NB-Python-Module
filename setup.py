@@ -10,7 +10,7 @@ setup(
     author = "Sébastien Loisel",
     description = ("Tools for the F19NB class at Heriot-Watt University"),
     license = "BSD",
-    url = "http://example.com/helloworld",
+    url='https://github.com/sloisel/pyptex',
     packages=['F19NB'],
     long_description=read('README.md'),
     install_requires=[
