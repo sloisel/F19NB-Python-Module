@@ -1,2 +1,1 @@
-# F19NB-Python-Module
-Python module for the F19NB class at Heriot-Watt University
+This module is for use by F19NB students at Heriot-Watt University.
