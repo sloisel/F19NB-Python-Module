@@ -54,7 +54,7 @@ def load(url):
 def discrete_2d_Laplacian(G):
   G = G.astype(int)
   G_ = np.unique(G)
-  assert np.min(G_)==0 and np.max(G_)==len(G_)+1
+  assert np.min(G_)==0 and np.max(G_)+1==len(G_)
   N = np.max(G)
   m = G.shape[0]-2
   n = G.shape[1]-2
