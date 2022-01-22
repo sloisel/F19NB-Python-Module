@@ -90,7 +90,7 @@ def solve(A,b):
 def I(n):
     return sparse.eye(n)
 def norm(a):
-  return np.linalg.norm(x)
+  return np.linalg.norm(a)
 def randn(n):
   return np.random.randn(n)
 def array(x):
