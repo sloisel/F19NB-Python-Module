@@ -5,7 +5,7 @@ import scipy
 import scipy.ndimage
 import scipy.sparse.linalg
 from scipy import sparse
-def myload(url):
+def load(url):
   (fname,_) = urllib.request.urlretrieve(url)
   try:
     data=plt.imread(fname)
@@ -51,7 +51,7 @@ def myload(url):
   plt.imshow(data)
   plt.show()
   return G
-def mydelsq(G):
+def delsq(G):
   G = G.astype(int)
   N = np.max(G)
   m = G.shape[0]-2
@@ -87,7 +87,15 @@ def solve(A,b):
   if(scipy.sparse.issparse(A)):
     return sparse.linalg.spsolve(A,b)
   return np.linalg.solve(A,b)
-def I_sparse(n):
+def I(n):
     return sparse.eye(n)
-def I_dense(n):
-    return np.eye(n)
+def norm(a):
+  return np.linalg.norm(x)
+def randn(n):
+  return np.random.randn(n)
+def array(x):
+  return np.array(x)
+def ones(n):
+  return np.ones(n)
+def dot(u,v):
+  return np.dot(u,v)
