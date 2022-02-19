@@ -14,6 +14,14 @@ def load(url):
     data=plt.imread(fname)
   M = np.max(data)
   data = data/M
+  if data.shape[2]==4:
+    d = data
+    data = np.zeros((d.shape[0],d.shape[1],3))
+    alpha = d[:,:,3]
+    if(np.min(alpha)<0.95):
+      print("Warning: the image has a nontrivial alpha channel.\nYou probably forgot to clear the background to white.")
+    for k in range(3):
+      data[:,:,k] = d[:,:,k]*alpha+(1-alpha)
   E = np.max(np.abs(data[:,:,0]-data[:,:,1])+
       np.abs(data[:,:,2]-data[:,:,1])+
       np.abs(data[:,:,0]-data[:,:,2]))
@@ -23,9 +31,9 @@ def load(url):
   assert 100<m and m<200, "Image should be between 100 and 200 pixels tall"
   assert 100<n and n<200, "Image should be between 100 and 200 pixels wide"
   G = np.zeros((m+2,n+2))
-  G[1:-1,1:-1] = (data[:,:,0]<0.1)+0
+  G[1:-1,1:-1] = (data[:,:,0]<0.25)+0
   F = np.sum(G)/(G.shape[0]*G.shape[1])
-  assert F>0.01, "Image should have at least 1% dark pixels"
+  assert F>0.1, "Image should have at least 10% dark pixels"
   assert F<0.9, "Image should have at most 90% dark pixels"
   H = np.copy(G)
   dirs = [[1,0],[-1,0],[0,1],[0,-1]]
