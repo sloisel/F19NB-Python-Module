@@ -28,8 +28,8 @@ def load(url):
   assert E<0.1, "Image should be black-and-white"
   m = data.shape[0]
   n = data.shape[1]
-  assert 100<m and m<200, "Image should be between 100 and 200 pixels tall"
-  assert 100<n and n<200, "Image should be between 100 and 200 pixels wide"
+  assert 100<=m and m<=200, "Image should be between 100 and 200 pixels tall"
+  assert 100<=n and n<=200, "Image should be between 100 and 200 pixels wide"
   G = np.zeros((m+2,n+2))
   G[1:-1,1:-1] = (data[:,:,0]<0.25)+0
   F = np.sum(G)/(G.shape[0]*G.shape[1])
@@ -61,8 +61,15 @@ def load(url):
   return G
 def discrete_2d_Laplacian(G):
   G = G.astype(int)
-  G_ = np.unique(G)
-  assert np.min(G_)==0 and np.max(G_)+1==len(G_)
+  G_ = np.reshape(G,np.prod(G.shape)); 
+  G_ = np.sort(G_[np.where(G_>0)])
+  assert np.array_equal(G_,np.array(range(1,len(G_)+1))), "The grid must enumerate consecutive vertices.\nSee the Section on the 2d Laplacian in the handout."
+  assert (
+    len(np.where(G[0,:]!=0)[0])==0
+    and len(np.where(G[-1,:]!=0)[0])==0
+    and len(np.where(G[:,0]!=0)[0])==0
+    and len(np.where(G[:,-1]!=0)[0])==0
+    ), "The perimeter of the grid must be 0"
   N = np.max(G)
   m = G.shape[0]-2
   n = G.shape[1]-2

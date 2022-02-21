@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "F19NB",
-    version = "1.0.4",
+    version = "1.0.5",
     author = "Sébastien Loisel",
     description = ("Tools for the F19NB class at Heriot-Watt University"),
     license = "BSD",
